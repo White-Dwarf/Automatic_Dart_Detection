@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/imgs">
+        <file>images/Dart_Board_BlackWhite.jpg</file>
+        <file>images/Dart_Board_Color.jpg</file>
+        <file>images/target_color2.jpg</file>
+        <file>images/target_color1.jpg</file>
+        <file>images/vectorRed[5442].png</file>
+        <file>images/vectorGreen.png</file>
+        <file>images/vectorFinished.png</file>
+    </qresource>
+</RCC>
