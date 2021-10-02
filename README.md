@@ -9,6 +9,9 @@ Using opencv library for Linux users:
 2. use cmake and set variable WITH_QT = true
 3. cmake: set source and build folder and generate cmake
 4. run the make and make install command
-5. qt.pro file ->
+5. qt.pro file -> For opencv: Include files with INCLUDEPATH += and Lib files with LIBS += 
 
 Tipp: To use cmake-gui command you need additional package with: "sudo apt-get install cmake-qt-gui" 
+
+
+To detect the darts on the board - images of the Dartboard with 0 to 3 darts were taken in a bright and dark environment and saved into the images/Dartboard folder.

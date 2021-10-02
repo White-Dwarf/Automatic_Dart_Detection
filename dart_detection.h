@@ -14,7 +14,7 @@ public:
 private:
 
 int saveImgNum = 1;
-int fps = 30;
+int fps = 1000;
 };
 
 #endif // DART_DETECTION_H
