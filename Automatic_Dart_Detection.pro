@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +22,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += opencv
 
 SOURCES += \
         main.cpp \
@@ -45,9 +47,32 @@ FORMS += \
     cricket.ui \
     x01_gamemodes.ui
 
+#Here include own path to opencv hpp files
 INCLUDEPATH += /usr/local/include/opencv4
 
-LIBS += 'pkg-config --libs opencv'
+#Here link opencv lib files
+LIBS += /usr/local/lib/libopencv_calib3d.so.4.5.3
+LIBS += /usr/local/lib/libopencv_core.so.4.5.3
+LIBS += /usr/local/lib/libopencv_dnn.so.4.5.3
+LIBS += /usr/local/lib/libopencv_features2d.so.4.5.3
+#LIBS += /usr/local/lib/libopencv_libopencv_flann.so
+#LIBS += /usr/local/lib/libopencv_libopencv_gapi.so
+LIBS += /usr/local/lib/libopencv_highgui.so.4.5.3
+LIBS += /usr/local/lib/libopencv_imgcodecs.so.4.5.3
+LIBS += /usr/local/lib/libopencv_imgproc.so.4.5.3
+LIBS += /usr/local/lib/libopencv_ml.so.4.5.3
+LIBS += /usr/local/lib/libopencv_objdetect.so.4.5.3
+LIBS += /usr/local/lib/libopencv_photo.so.4.5.3
+LIBS += /usr/local/lib/libopencv_stitching.so.4.5.3
+LIBS += /usr/local/lib/libopencv_video.so.4.5.3
+LIBS += /usr/local/lib/libopencv_videoio.so.4.5.3
+
+
+#LIBS += `pkg-config --libs opencv`
+#LIBS += `pkg-config opencv4 --cflags --clibs`
+#LIBS += -libopencv_core -libopencv_imgproc -libopencv_imgcodecs -libopencv_highgui -libopencv_video
+
+
 
 
 # Default rules for deployment.

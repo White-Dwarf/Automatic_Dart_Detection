@@ -24,6 +24,10 @@ private slots:
 
     void on_button_cricket_pressed();
 
+    void on_button_video_capture_released();
+
+    void on_button_image_detection_released();
+
 private:
     Ui::MainWindow *ui;
 };

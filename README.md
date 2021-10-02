@@ -1,6 +1,7 @@
 # Automatic_Dart_Detection
 Counts dart thrown on board with cameras and writes score in GUI
 
+-Using raspberry pi 3B+
 
 Using opencv library for Linux users:
 
