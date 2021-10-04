@@ -2,40 +2,39 @@
 """
 Created on Sun Oct  3 12:03:52 2021
 
-@author: timon
+@author: Timon Bergmann
 """
-
 
 import numpy as np
 import cv2
 
 
-img = cv2.imread('C:/Users/timon/Desktop/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_1Dart_Bright.png') 
-
+img_0darts = cv2.imread('C:/Users/timon/Desktop/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_0Darts_Bright.png') 
+img_3darts = cv2.imread('C:/Users/timon/Desktop/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_3Darts_Bright.png') 
 #make copy to later output detections on rgb image
-output = img.copy()
+output = img_0darts.copy()
 
 #make grayscale image
-img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-cv2.imshow('Color Image',img)
-cv2.imshow('Grayscale Image',img_gray)
-###################################
-edges = cv2.Canny(img_gray,50,150,apertureSize = 3)
+img_gray = cv2.cvtColor(img_0darts, cv2.COLOR_RGB2GRAY)
 
-minLineLength=100
-lines = cv2.HoughLinesP(image=edges,rho=1,theta=np.pi/180, threshold=100,lines=np.array([]), 100 ,maxLineGap=80)
+#try maybe fft with images 0 and 3 darts
+#f = cv2.dft(np.float32(img_0darts), flags=cv2.DFT_COMPLEX_OUTPUT)
+#f_shift = np.fft.fftshift(f)
+#f_complex = f_shift[:,:,0] + 1j*f_shift[:,:,1]
+#f_abs = np.abs(f_complex) + 1 # lie between 1 and 1e6
+#f_bounded = 20 * np.log(f_abs)
+#f_img = 255 * f_bounded / np.max(f_bounded)
+#f_img = f_img.astype(np.uint8)
 
-a,b,c = lines.shape
-for i in range(a):
-    cv2.line(img_gray, (lines[i][0][0], lines[i][0][1]), (lines[i][0][2], lines[i][0][3]), (0, 0, 255), 3, cv2.LINE_AA)
-    cv2.imshow("a",img_gray)
-###################################
-#erosion
+#morphological operations
 kernel = np.ones((5,5),np.uint8)
 erosion = cv2.erode(img_gray,kernel,iterations = 1)
 
+#Take contours 
 contours = img_gray - erosion
 cv2.imshow('erosion subtraction', contours)
 
+cv2.imshow('image normal', img_0darts) 
+cv2.imshow('grayscale', img_gray) 
 
 #cv2.waitKey(0)        
