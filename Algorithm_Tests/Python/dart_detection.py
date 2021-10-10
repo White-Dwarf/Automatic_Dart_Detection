@@ -9,8 +9,8 @@ import numpy as np
 import cv2
 
 
-img_0darts = cv2.imread('C:/Users/timon/Desktop/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_0Darts_Bright.png') 
-img_3darts = cv2.imread('C:/Users/timon/Desktop/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_3Darts_Bright.png') 
+img_0darts = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png') 
+img_3darts = cv2.imread('./../../images/Dartboard/Dartboard_3Darts_Bright.png') 
 #make copy to later output detections on rgb image
 output = img_0darts.copy()
 
@@ -37,4 +37,4 @@ cv2.imshow('erosion subtraction', contours)
 cv2.imshow('image normal', img_0darts) 
 cv2.imshow('grayscale', img_gray) 
 
-#cv2.waitKey(0)        
+cv2.waitKey(0)        

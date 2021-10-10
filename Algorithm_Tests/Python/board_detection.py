@@ -9,7 +9,7 @@ import numpy as np
 import cv2
 
 
-img = cv2.imread('C:/Users/timon/Desktop/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_0Darts_Bright.png') 
+img = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png') 
 
 #make copy to later output detections on rgb image
 output = img.copy()
@@ -57,4 +57,4 @@ if circles is not None:
 cv2.imshow("detected circles", img)
 # show the output image
 cv2.imshow("output", np.hstack([img, output]))
-#cv2.waitKey(0)        
+cv2.waitKey(0)        
