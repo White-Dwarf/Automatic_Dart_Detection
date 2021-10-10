@@ -1,0 +1,8 @@
+# visual code
+./vscode/*
+
+# build
+./build/*
+
+*.pro
+*.pro.user
