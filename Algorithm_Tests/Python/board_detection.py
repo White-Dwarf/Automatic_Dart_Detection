@@ -8,6 +8,12 @@ Created on Fri Sep 17 14:13:27 2021
 import numpy as np
 import cv2
 
+#IDEA - To free board from surrounded bits: Make mask with outmost circle of dartboard
+
+
+
+
+
 
 img = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png') 
 
@@ -23,6 +29,7 @@ erosion = cv2.erode(img_gray,kernel,iterations = 1)
 
 #Take contours 
 contours = img_gray - erosion
+
 cv2.imshow('erosion subtraction', contours)
 
 cv2.imshow('image normal', img) 
@@ -33,15 +40,22 @@ kernel_size =5
 blur_gray = cv2.GaussianBlur(contours,(kernel_size, kernel_size),0)
 
 #canny
-low_threshold = 10
-high_threshold = 220
+low_threshold = 20
+high_threshold = 255
 edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
 cv2.imshow('canny', edges)
  
+
+######################################
+#contours, hierarchy = cv2.findContours(img, mode=cv2.RETR_EXTERNAL, method=cv2.CHAIN_APPROX_NONE)
+#cv2.imshow('Canny Edges After Contouring', edges)
+#print("Number of Contours found = " + str(len(contours)))
+
+###################################
 #Hough circles(detect circles on image)
 #gray = cv2.medianBlur(gray, 5)
 
-circles = cv2.HoughCircles(edges,cv2.HOUGH_GRADIENT, 1.2, 500)
+circles = cv2.HoughCircles(blur_gray,cv2.HOUGH_GRADIENT, 1.2, 100)
 cv2.imshow('Hough Circles', edges) 
 
 if circles is not None:
@@ -57,4 +71,4 @@ if circles is not None:
 cv2.imshow("detected circles", img)
 # show the output image
 cv2.imshow("output", np.hstack([img, output]))
-cv2.waitKey(0)        
+#cv2.waitKey(0)        
