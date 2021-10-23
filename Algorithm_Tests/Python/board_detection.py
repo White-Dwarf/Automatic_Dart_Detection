@@ -13,16 +13,32 @@ img = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png')
 hd_img = cv2.imread('./../../images/Dart_Board_Color.png') 
 
 #cv2.imshow('image normal', img) 
-#cv2.imshow('HD image normal', hd_img) 
+cv2.imshow('HD image normal', hd_img) 
 
 #color separation on image
 img_hsv = cv2.cvtColor(hd_img, cv2.COLOR_BGR2HSV)
-mask = cv2.inRange(hd_img,(40,40,40),(70,255,255))
-hd_img_red = cv2.bitwise_and(hd_img, hd_img, mask = mask)
+red_mask_1 = cv2.inRange(img_hsv,(0,50,20),(15,255,255))#extract red
+red_mask_2 = cv2.inRange(img_hsv,(165,50,20),(180,255,255))#extract red
+red_mask = red_mask_1 + red_mask_2
+ 
+green_mask = cv2.inRange(img_hsv,(35,50,20),(80,255,255))#extract green
+black_mask = cv2.inRange(img_hsv,(0,0,0),(255,255,10))#extract black
+white_mask = cv2.inRange(img_hsv,(0,30,20),(30,150,255))#extract white
 
-cv2.imshow('color mask', mask) 
+cv2.imwrite('hd_red_mask.png', red_mask)
+cv2.imwrite('hd_green_mask.png', green_mask)
+cv2.imwrite('hd_white_mask.png', white_mask)
+cv2.imwrite('hd_black_mask.png', black_mask)
+
+
+hd_img_red = cv2.bitwise_and(hd_img, hd_img, mask = red_mask)
+hd_img_green = cv2.bitwise_and(hd_img, hd_img, mask = green_mask)
+hd_img_white = cv2.bitwise_and(hd_img, hd_img, mask = white_mask)
+
+cv2.imshow('Mask', white_mask) 
 cv2.imshow('extracted red', hd_img_red) 
-
+cv2.imshow('extracted green', hd_img_green) 
+cv2.imshow('extracted white', hd_img_white) 
 
 #make copy to later output detections on rgb image
 output = img.copy()
@@ -31,7 +47,7 @@ output = img.copy()
 img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 hd_img_gray = cv2.cvtColor(hd_img, cv2.COLOR_RGB2GRAY)
 
-cv2.imshow('grayscale', img_gray) 
+#cv2.imshow('grayscale', img_gray) 
 
 #morphological operations
 kernel = np.ones((5,5),np.uint8)
