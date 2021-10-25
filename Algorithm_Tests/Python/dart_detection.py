@@ -14,8 +14,19 @@ img_3darts = cv2.imread('./../../images/Dartboard/Dartboard_3Darts_Bright.png')
 #make copy to later output detections on rgb image
 output = img_0darts.copy()
 
+
 #make grayscale image
-img_gray = cv2.cvtColor(img_0darts, cv2.COLOR_RGB2GRAY)
+img_gray_0darts = cv2.cvtColor(img_0darts, cv2.COLOR_RGB2GRAY)
+img_gray_3darts = cv2.cvtColor(img_0darts, cv2.COLOR_RGB2GRAY)
+
+diff = cv2.absdiff(img_0darts, img_3darts)
+diff_gray = cv2.cvtColor(diff, cv2.COLOR_RGB2GRAY)
+
+ret, thresh = cv2.threshold(diff_gray, 150, 255, cv2.THRESH_BINARY)
+
+cv2.imshow('isolating darts', diff)
+cv2.imshow('thresholded image', thresh)
+
 
 #try maybe fft with images 0 and 3 darts
 #f = cv2.dft(np.float32(img_0darts), flags=cv2.DFT_COMPLEX_OUTPUT)
@@ -37,4 +48,4 @@ cv2.imshow('erosion subtraction', contours)
 cv2.imshow('image normal', img_0darts) 
 cv2.imshow('grayscale', img_gray) 
 
-cv2.waitKey(0)        
+#cv2.waitKey(0)        

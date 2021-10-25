@@ -11,17 +11,21 @@ import cv2
 #IDEA - To free board from surrounded bits: Make mask with outmost circle of dartboard
 img = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png') 
 hd_img = cv2.imread('./../../images/Dart_Board_Color.png') 
+red_mask_ = cv2.imread('./../../images/hd_red_mask.png') 
 
 #cv2.imshow('image normal', img) 
 cv2.imshow('HD image normal', hd_img) 
 
+re1t, red_tresh = cv2.threshold(red_mask_, 100, 255, cv2.THRESH_BINARY)
+cv2.imshow('thesholded red', red_tresh) 
+
 #color separation on image
 img_hsv = cv2.cvtColor(hd_img, cv2.COLOR_BGR2HSV)
-red_mask_1 = cv2.inRange(img_hsv,(0,50,20),(15,255,255))#extract red
-red_mask_2 = cv2.inRange(img_hsv,(165,50,20),(180,255,255))#extract red
+red_mask_1 = cv2.inRange(img_hsv,(0,150,20),(15,255,255))#extract red
+red_mask_2 = cv2.inRange(img_hsv,(165,150,20),(180,255,255))#extract red
 red_mask = red_mask_1 + red_mask_2
  
-green_mask = cv2.inRange(img_hsv,(35,50,20),(80,255,255))#extract green
+green_mask = cv2.inRange(img_hsv,(35,150,20),(80,255,255))#extract green
 black_mask = cv2.inRange(img_hsv,(0,0,0),(255,255,10))#extract black
 white_mask = cv2.inRange(img_hsv,(0,30,20),(30,150,255))#extract white
 
@@ -83,9 +87,6 @@ cv2.imshow('drawn contours', output)
 hd_image, hd_contours, hd_hierachy =cv2.findContours(hd_thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 cv2.drawContours(hd_img, hd_contours, contourIdx=-1, color=(0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
 cv2.imshow('HD drawn contours', hd_img)
-
-
-
 
 ####Sorting contours --> draw bounding boxes over contour
 contoursSorted_hd = sorted(hd_contours, key=cv2.contourArea, reverse=True)
