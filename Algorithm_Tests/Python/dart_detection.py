@@ -14,6 +14,7 @@ img_3darts = cv2.imread('./../../images/Dartboard/Dartboard_3Darts_Bright.png')
 #make copy to later output detections on rgb image
 output = img_0darts.copy()
 
+cv2.imshow('normal', img_3darts)
 
 #make grayscale image
 img_gray_0darts = cv2.cvtColor(img_0darts, cv2.COLOR_RGB2GRAY)
@@ -43,13 +44,6 @@ for c in contours:
     box = cv2.boxPoints(rect)
     box = np.int0(box)
     cv2.drawContours(output,[box],0,(0,0,255),2)
-    
-    rows,cols = canny.shape[:2]
-    [vx,vy,x,y] = cv2.fitLine(c, cv2.DIST_L2,0,0.01,0.01)
-    lefty = int((-x*vy/vx) + y)
-    righty = int(((cols-x)*vy/vx)+y)
-    cv2.line(output,(cols-1,righty),(0,lefty),(0,255,0),1)
-    cv2.imshow('contours detected', output)
 
 #try maybe fft with images 0 and 3 darts
 #f = cv2.dft(np.float32(img_0darts), flags=cv2.DFT_COMPLEX_OUTPUT)
