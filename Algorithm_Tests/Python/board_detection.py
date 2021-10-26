@@ -75,20 +75,23 @@ edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
 hd_edges = cv2.Canny(hd_blur_gray, low_threshold, high_threshold)
 
 #cv2.imshow('canny', edges)
-#cv2.imshow('hd canny', hd_edges)
+cv2.imshow('hd canny', hd_edges)
 
 ###############try detect circles
 image, contours,hierarchy = cv2.findContours(hd_edges, 1, 2)
 cnt = contours[0]
 M = cv2.moments(cnt)
 #moments will be printed into console
-print( M )
+#print( M )
 
-(x,y),radius = cv2.minEnclosingCircle(cnt)
-center = (int(x),int(y))
-radius = int(radius)
-cv2.circle(hd_outline,center,radius,(0,255,0),2)
-cv2.imshow('circle', hd_outline)
+for c in contours:
+    (x,y,w,h) = cv2.boundingRect(c)
+    cv2.rectangle(hd_img, (x,y), (x+w,y+h), (0,0,255),2)
+    (x,y),radius = cv2.minEnclosingCircle(c)
+    center = (int(x),int(y))
+    radius = int(radius)
+    cv2.circle(hd_img,center,radius,(0,255,0),2)
+cv2.imshow('circles', hd_img)
 ###################################
 
 

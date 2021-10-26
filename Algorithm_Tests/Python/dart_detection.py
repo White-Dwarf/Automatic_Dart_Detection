@@ -27,6 +27,22 @@ ret, thresh = cv2.threshold(diff_gray, 150, 255, cv2.THRESH_BINARY)
 cv2.imshow('isolating darts', diff)
 cv2.imshow('thresholded image', thresh)
 
+kernel_size =5
+blur = cv2.GaussianBlur(diff_gray,(kernel_size, kernel_size),0)
+canny = cv2.Canny(blur, 50, 255)
+
+cv2.imshow('Canny', canny)
+
+image, contours,hierarchy = cv2.findContours(canny, 1, 2)
+
+for c in contours:
+    (x,y,w,h) = cv2.boundingRect(c)
+    cv2.rectangle(canny, (x,y), (x+w,y+h), (0,0,255),2)
+    rect = cv2.minAreaRect(c)
+    box = cv2.boxPoints(rect)
+    box = np.int0(box)
+    cv2.drawContours(diff_gray,[box],0,(0,0,255),2)
+cv2.imshow('contours detected', diff_gray)
 
 #try maybe fft with images 0 and 3 darts
 #f = cv2.dft(np.float32(img_0darts), flags=cv2.DFT_COMPLEX_OUTPUT)
