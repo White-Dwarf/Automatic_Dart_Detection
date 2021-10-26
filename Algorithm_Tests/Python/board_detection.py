@@ -50,7 +50,6 @@ output = img.copy()
 #make grayscale image
 img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 hd_img_gray = cv2.cvtColor(hd_img, cv2.COLOR_RGB2GRAY)
-
 #cv2.imshow('grayscale', img_gray) 
 
 #morphological operations
@@ -67,13 +66,32 @@ cv2.imshow('HD Outline', hd_outline)
 #line detection with grayscale image-------------
 kernel_size =5
 blur_gray = cv2.GaussianBlur(outline,(kernel_size, kernel_size),0)
-
+hd_blur_gray = cv2.GaussianBlur(hd_outline,(kernel_size, kernel_size),0)
 #canny
 low_threshold = 20
 high_threshold = 255
 edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
-cv2.imshow('canny', edges)
- 
+
+hd_edges = cv2.Canny(hd_blur_gray, low_threshold, high_threshold)
+
+#cv2.imshow('canny', edges)
+#cv2.imshow('hd canny', hd_edges)
+
+###############try detect circles
+image, contours,hierarchy = cv2.findContours(hd_edges, 1, 2)
+cnt = contours[0]
+M = cv2.moments(cnt)
+#moments will be printed into console
+print( M )
+
+(x,y),radius = cv2.minEnclosingCircle(cnt)
+center = (int(x),int(y))
+radius = int(radius)
+cv2.circle(hd_outline,center,radius,(0,255,0),2)
+cv2.imshow('circle', hd_outline)
+###################################
+
+
 #Search Contours in thresholded image 
 ret, thresh = cv2.threshold(outline, 90, 255, cv2.THRESH_BINARY)
 cv2.imshow('Binary image', thresh)
