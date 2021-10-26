@@ -29,20 +29,27 @@ cv2.imshow('thresholded image', thresh)
 
 kernel_size =5
 blur = cv2.GaussianBlur(diff_gray,(kernel_size, kernel_size),0)
-canny = cv2.Canny(blur, 50, 255)
+canny = cv2.Canny(blur, 90, 255)
 
 cv2.imshow('Canny', canny)
 
-image, contours,hierarchy = cv2.findContours(canny, 1, 2)
-
+image, contours,hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(img_3darts, contours, -1, (0,255,0), 3)
+cv2.imshow('condted', img_3darts)
 for c in contours:
     (x,y,w,h) = cv2.boundingRect(c)
     cv2.rectangle(canny, (x,y), (x+w,y+h), (0,0,255),2)
     rect = cv2.minAreaRect(c)
     box = cv2.boxPoints(rect)
     box = np.int0(box)
-    cv2.drawContours(diff_gray,[box],0,(0,0,255),2)
-cv2.imshow('contours detected', diff_gray)
+    cv2.drawContours(output,[box],0,(0,0,255),2)
+    
+    rows,cols = canny.shape[:2]
+    [vx,vy,x,y] = cv2.fitLine(c, cv2.DIST_L2,0,0.01,0.01)
+    lefty = int((-x*vy/vx) + y)
+    righty = int(((cols-x)*vy/vx)+y)
+    cv2.line(output,(cols-1,righty),(0,lefty),(0,255,0),1)
+    cv2.imshow('contours detected', output)
 
 #try maybe fft with images 0 and 3 darts
 #f = cv2.dft(np.float32(img_0darts), flags=cv2.DFT_COMPLEX_OUTPUT)
@@ -55,13 +62,13 @@ cv2.imshow('contours detected', diff_gray)
 
 #morphological operations
 kernel = np.ones((5,5),np.uint8)
-erosion = cv2.erode(img_gray,kernel,iterations = 1)
+erosion = cv2.erode(img_gray_0darts,kernel,iterations = 1)
 
 #Take contours 
-contours = img_gray - erosion
+contours = img_gray_0darts - erosion
 cv2.imshow('erosion subtraction', contours)
 
 cv2.imshow('image normal', img_0darts) 
-cv2.imshow('grayscale', img_gray) 
+cv2.imshow('grayscale', img_gray_0darts) 
 
 #cv2.waitKey(0)        
