@@ -13,24 +13,37 @@ X01::~X01()
     delete ui;
 }
 
+void X01::init(int StartScore, bool doubleOut, bool masterOut)
+{
+    setGameCounter(StartScore);
+    setGameMode(doubleOut,masterOut);
+
+}
+
 //setting initial Score Counter
 void X01::setGameCounter(int gameCount)
 {
     ui->count_label->setNum(gameCount);
-    ui->player1_score_label->setNum(gameCount);
-    ui->player2_score_label->setNum(gameCount);
+    Player1_score = gameCount;
+    Player2_score = gameCount;
+    ui->player1_score_label->setNum(Player1_score);
+    ui->player2_score_label->setNum(Player2_score);
 }
 
-void X01::setGameMode(bool checkbox)
+void X01::setGameMode(bool doubleOut, bool masterOut)
 {
-    if(checkbox == true)
+    if(doubleOut)
     {
       ui->mode_label->setText("Double Out");
     }
-    else {
+    else if(masterOut)
+    {
+      ui->mode_label->setText("Master Out");
+    }
+    else
+    {
       ui->mode_label->setText("Straight Out");
     }
-
 }
 
 void X01::updateScore(int player)

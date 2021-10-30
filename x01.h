@@ -16,14 +16,15 @@ public:
     X01(QWidget *parent = nullptr);
     ~X01();
 
-    int gameCount = 0; // integer for setting gamemode
+    int gameCount = 0; // Counting during game
 
     //string gameMode;
     void calculateScore(int score);
 
-    void setGameMode(bool checkbox);
+    void setGameMode(bool doubleOut, bool masterOut);
     void setGameCounter(int gameCounter);
     void updateScore(int player);
+    void init(int StartScore, bool doubleOut, bool masterOut);
 
 private:
     Ui::X01 *ui;

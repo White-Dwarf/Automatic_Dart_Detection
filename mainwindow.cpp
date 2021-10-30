@@ -35,8 +35,8 @@ void MainWindow::on_button_cricket_pressed()
 //open camera with id 0
 void MainWindow::on_button_video_capture_released()
 {
-    Dart_Detection c1;
-    c1.openCamera(0);
+    //Dart_Detection c1;
+   // c1.openCamera(0);
 
     //Dart_Detection c2;
     //c2.openCamera(1);

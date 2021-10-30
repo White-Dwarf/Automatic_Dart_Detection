@@ -30,6 +30,10 @@ private slots:
 
     void on_btn_back_released();
 
+    void on_doubleOut_checkbox_released();
+
+    void on_masterOut_checkbox_released();
+
 private:
     Ui::X01_gamemodes *ui;
     bool doubleOut;

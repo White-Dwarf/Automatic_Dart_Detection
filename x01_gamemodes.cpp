@@ -17,41 +17,43 @@ X01_gamemodes::~X01_gamemodes()
     delete ui;
 }
 
-
 void X01_gamemodes::on_btn_gamemode_301_released()
 {
-    x01->gameCount = 301;
+    x01->init(301,ui->doubleOut_checkbox->isChecked(),ui->masterOut_checkbox->isChecked());
     x01->show();
-    x01->setGameCounter(x01->gameCount);
-    x01->setGameMode(ui->doubleOut_radiobtn->isChecked());
-
 }
 
 void X01_gamemodes::on_btn_gamemode_501_released()
 {
-    x01->gameCount = 501;
+    x01->init(501,ui->doubleOut_checkbox->isChecked(),ui->masterOut_checkbox->isChecked());
     x01->show();
-    x01->setGameCounter(x01->gameCount);
-    x01->setGameMode(ui->doubleOut_radiobtn->isChecked());
 }
 
 void X01_gamemodes::on_btn_gamemode_701_released()
-{
-    x01->gameCount = 701;
+{ 
+    x01->init(701,ui->doubleOut_checkbox->isChecked(),ui->masterOut_checkbox->isChecked());
     x01->show();
-    x01->setGameCounter(x01->gameCount);
-    x01->setGameMode(ui->doubleOut_radiobtn->isChecked());
 }
 
 void X01_gamemodes::on_btn_gamemode_1001_released()
 {
-    x01->gameCount = 1001;
+    x01->init(1001,ui->doubleOut_checkbox->isChecked(),ui->masterOut_checkbox->isChecked());
     x01->show();
-    x01->setGameCounter(x01->gameCount);
-    x01->setGameMode(ui->doubleOut_radiobtn->isChecked());
 }
 
 void X01_gamemodes::on_btn_back_released()
 {
     X01_gamemodes::close();
 }
+
+void X01_gamemodes::on_doubleOut_checkbox_released()
+{
+    ui->masterOut_checkbox->setChecked(false);
+}
+
+
+void X01_gamemodes::on_masterOut_checkbox_released()
+{
+    ui->doubleOut_checkbox->setChecked(false);
+}
+

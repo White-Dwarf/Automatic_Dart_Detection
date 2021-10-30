@@ -9,7 +9,7 @@ class Dart_Detection
 public:
     Dart_Detection();
     void fetchImages(VideoCapture Camera);
-    int openCamera(int id);
+    //int openCamera(int id);
 
 private:
 
