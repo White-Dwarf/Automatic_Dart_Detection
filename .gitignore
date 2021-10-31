@@ -8,3 +8,4 @@
 *.pro.user
 *.user
 *.stash
+*.o
