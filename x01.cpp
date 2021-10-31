@@ -57,3 +57,20 @@ void X01::updateScore(int player)
        ui->player2_score_label->setNum(gameCount - Player2_score);
    }
 }
+
+void X01::startGame()
+{
+
+    while(Player1_score || Player2_score != 0)
+    {
+
+        //fetch images
+        //get score
+        //display score on gui
+
+        //compare if score is below 0 -> if true reset score and display in red
+    }
+
+    //start winning screen -> anzahl round und name des gewinners
+
+}

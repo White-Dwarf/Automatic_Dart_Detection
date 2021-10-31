@@ -25,6 +25,7 @@ public:
     void setGameCounter(int gameCounter);
     void updateScore(int player);
     void init(int StartScore, bool doubleOut, bool masterOut);
+    void startGame();
 
 private:
     Ui::X01 *ui;
