@@ -1,6 +1,7 @@
 #include "dart_detection.h"
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <QDebug>
 
 using namespace std;
 using namespace cv;
@@ -11,6 +12,25 @@ Dart_Detection::Dart_Detection()
     
     
 }
+
+void Dart_Detection::imageProc()
+{
+
+    Mat Img_0_darts = imread("./../../images/Dartboard/Dartboard_0Darts_Bright.png");
+
+
+    if (Img_0_darts.empty())
+    {
+       qDebug() << "!!! Failed imread(): image not found";
+        // don't let the execution continue, else imshow() will crash.
+    }
+
+    namedWindow( "Display window", WINDOW_AUTOSIZE );// Create a window for display.
+    imshow( "Display window", Img_0_darts );
+    //imshow( "Display window", Img_1_darts );
+
+}
+
 
 //int Dart_Detection::openCamera(int id)
 //{

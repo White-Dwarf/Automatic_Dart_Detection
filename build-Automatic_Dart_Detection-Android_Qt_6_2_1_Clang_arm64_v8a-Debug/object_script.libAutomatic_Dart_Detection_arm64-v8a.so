@@ -1,0 +1,12 @@
+calibration.obj
+main.obj
+mainwindow.obj
+x01.obj
+dart_detection.obj
+cricket.obj
+x01_gamemodes.obj
+qrc_resources.obj
+moc_mainwindow.obj
+moc_x01.obj
+moc_cricket.obj
+moc_x01_gamemodes.obj

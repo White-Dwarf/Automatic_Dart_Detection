@@ -1,0 +1,12 @@
+release/calibration.o
+release/main.o
+release/mainwindow.o
+release/x01.o
+release/dart_detection.o
+release/cricket.o
+release/x01_gamemodes.o
+release/qrc_resources.o
+release/moc_mainwindow.o
+release/moc_x01.o
+release/moc_cricket.o
+release/moc_x01_gamemodes.o

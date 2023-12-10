@@ -8,6 +8,12 @@ Created on Fri Sep 17 14:13:27 2021
 import numpy as np
 import cv2
 
+from skimage import data, color, img_as_ubyte
+from skimage.feature import canny
+from skimage.transform import hough_ellipse
+from skimage.draw import ellipse_perimeter
+
+
 #IDEA - To free board from surrounded bits: Make mask with outmost circle of dartboard
 img = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png') 
 hd_img = cv2.imread('./../../images/Dart_Board_Color.png') 
@@ -85,14 +91,24 @@ M = cv2.moments(cnt)
 #print( M )
 
 for c in contours:
-    (x,y,w,h) = cv2.boundingRect(c)
-    cv2.rectangle(hd_img, (x,y), (x+w,y+h), (0,0,255),2)
+    #(x,y,w,h) = cv2.boundingRect(c)
+    #cv2.rectangle(hd_img, (x,y), (x+w,y+h), (0,0,255),2)
     (x,y),radius = cv2.minEnclosingCircle(c)
     center = (int(x),int(y))
     radius = int(radius)
     cv2.circle(hd_img,center,radius,(0,255,0),2)
 cv2.imshow('circles', hd_img)
 ###################################
+
+##########################################
+
+
+
+
+
+
+
+
 
 
 #Search Contours in thresholded image 

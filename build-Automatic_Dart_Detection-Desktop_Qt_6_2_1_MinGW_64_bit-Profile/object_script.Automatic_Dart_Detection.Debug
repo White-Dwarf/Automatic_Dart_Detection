@@ -1,0 +1,12 @@
+debug/calibration.o
+debug/main.o
+debug/mainwindow.o
+debug/x01.o
+debug/dart_detection.o
+debug/cricket.o
+debug/x01_gamemodes.o
+debug/qrc_resources.o
+debug/moc_mainwindow.o
+debug/moc_x01.o
+debug/moc_cricket.o
+debug/moc_x01_gamemodes.o

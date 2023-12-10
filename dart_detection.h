@@ -10,6 +10,7 @@ public:
     Dart_Detection();
     void fetchImages(VideoCapture Camera);
     //int openCamera(int id);
+    void imageProc();
 
 private:
 
