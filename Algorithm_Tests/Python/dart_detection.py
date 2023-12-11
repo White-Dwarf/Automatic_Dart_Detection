@@ -9,12 +9,12 @@ import numpy as np
 import cv2
 
 
-img_0darts = cv2.imread('./../../images/Dartboard/Dartboard_0Darts_Bright.png') 
+img_0darts = cv2.imread('D:/Hobby/Coding/Projects/Automatic_Dart_Detection/images/Dartboard/Dartboard_0Darts_Bright.png') 
 img_3darts = cv2.imread('./../../images/Dartboard/Dartboard_1Darts_Bright.png') 
 #make copy to later output detections on rgb image
 output = img_0darts.copy()
 
-cv2.imshow('normal', img_3darts)
+cv2.imshow('normal', img_0darts);cv2.waitKey(1) 
 
 #make grayscale image
 img_gray_0darts = cv2.cvtColor(img_0darts, cv2.COLOR_RGB2GRAY)
@@ -25,18 +25,16 @@ diff_gray = cv2.cvtColor(diff, cv2.COLOR_RGB2GRAY)
 
 ret, thresh = cv2.threshold(diff_gray, 150, 255, cv2.THRESH_BINARY)
 
-cv2.imshow('isolating darts', diff)
-cv2.imshow('thresholded image', thresh)
-
+cv2.imshow('isolating darts', diff);cv2.waitKey(1) 
+cv2.imshow('thresholded image', thresh);cv2.waitKey(1) 
 kernel_size =5
 blur = cv2.GaussianBlur(diff_gray,(kernel_size, kernel_size),0)
 canny = cv2.Canny(blur, 90, 255)
 
-cv2.imshow('Canny', canny)
-    
+cv2.imshow('Canny', canny);cv2.waitKey(1)
 image, contours,hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 cv2.drawContours(img_3darts, contours, -1, (0,255,0), 3)
-cv2.imshow('condted', img_3darts)
+cv2.imshow('condted', img_3darts);cv2.waitKey(1)
 
 res = []
 for c in contours:
@@ -67,9 +65,8 @@ erosion = cv2.erode(img_gray_0darts,kernel,iterations = 1)
 
 #Take contours 
 contours = img_gray_0darts - erosion
-cv2.imshow('erosion subtraction', contours)
+cv2.imshow('erosion subtraction', contours);cv2.waitKey(1)
 
-cv2.imshow('image normal', img_0darts) 
-cv2.imshow('grayscale', img_gray_0darts) 
-
-#cv2.waitKey(0)        
+cv2.imshow('image normal', img_0darts);cv2.waitKey(1) 
+cv2.imshow('grayscale', img_gray_0darts);cv2.waitKey(1)
+       
